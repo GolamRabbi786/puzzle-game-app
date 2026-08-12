@@ -1,4 +1,6 @@
 /* DO NOT CHANGE */
+/* Theme fonts: Fredoka (playful display) + Nunito (body) */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
@@ -9,6 +11,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fredoka", "Nunito", ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -42,40 +46,40 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* CHANGE VALUES FOR THEME */
+/* CHANGE VALUES FOR THEME — light & colorful gaming palette */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --radius: 0.75rem;
+  --background: oklch(0.985 0.02 85);
+  --foreground: oklch(0.3 0.045 55);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.3 0.045 55);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --popover-foreground: oklch(0.3 0.045 55);
+  --primary: oklch(0.66 0.19 32);
+  --primary-foreground: oklch(0.99 0.01 85);
+  --secondary: oklch(0.95 0.05 85);
+  --secondary-foreground: oklch(0.45 0.09 45);
+  --muted: oklch(0.955 0.03 85);
+  --muted-foreground: oklch(0.55 0.045 55);
+  --accent: oklch(0.94 0.05 190);
+  --accent-foreground: oklch(0.33 0.06 190);
+  --destructive: oklch(0.6 0.22 27);
+  --border: oklch(0.9 0.035 80);
+  --input: oklch(0.9 0.035 80);
+  --ring: oklch(0.66 0.19 32);
+  --chart-1: oklch(0.66 0.19 32);
+  --chart-2: oklch(0.7 0.14 190);
+  --chart-3: oklch(0.72 0.15 150);
+  --chart-4: oklch(0.68 0.18 310);
+  --chart-5: oklch(0.7 0.18 10);
+  --sidebar: oklch(0.985 0.02 85);
+  --sidebar-foreground: oklch(0.3 0.045 55);
+  --sidebar-primary: oklch(0.66 0.19 32);
+  --sidebar-primary-foreground: oklch(0.99 0.01 85);
+  --sidebar-accent: oklch(0.94 0.05 190);
+  --sidebar-accent-foreground: oklch(0.33 0.06 190);
+  --sidebar-border: oklch(0.9 0.035 80);
+  --sidebar-ring: oklch(0.66 0.19 32);
 }
 
 .dark {
@@ -118,6 +122,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+    background-image:
+      radial-gradient(900px 480px at 88% -8%, oklch(0.95 0.07 90 / 0.55), transparent 60%),
+      radial-gradient(800px 420px at -8% 4%, oklch(0.94 0.06 185 / 0.45), transparent 55%),
+      radial-gradient(700px 380px at 50% 110%, oklch(0.96 0.06 320 / 0.35), transparent 60%);
+    background-attachment: fixed;
   }
   button:not([disabled]),
   [role="button"]:not([disabled]) {
