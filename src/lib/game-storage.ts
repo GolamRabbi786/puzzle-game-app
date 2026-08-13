@@ -10,6 +10,7 @@ const SOUND_KEY = "gamezone.sound";
 const BEST_PREFIX = "gamezone.best.";
 const WINS_KEY = "gamezone.wins";
 const SNAKE_HIGH_KEY = "gamezone.snake.high";
+const MOB_LEVEL_KEY = "gamezone.mob.level";
 export const SETTINGS_EVENT = "gamezone:settings";
 
 export function formatTime(totalSeconds: number): string {
@@ -73,11 +74,24 @@ export function saveSnakeHigh(score: number): boolean {
   return true;
 }
 
+export function getMobLevel(): number {
+  if (typeof window === "undefined") return 1;
+  const n = Number.parseInt(window.localStorage.getItem(MOB_LEVEL_KEY) ?? "", 10);
+  return Number.isFinite(n) && n >= 1 ? n : 1;
+}
+
+export function saveMobLevel(level: number): boolean {
+  if (level <= getMobLevel()) return false;
+  window.localStorage.setItem(MOB_LEVEL_KEY, String(level));
+  return true;
+}
+
 export function clearScores(): void {
   for (const d of DIFFICULTIES) {
     window.localStorage.removeItem(`${BEST_PREFIX}${d.size}`);
   }
   window.localStorage.removeItem(WINS_KEY);
   window.localStorage.removeItem(SNAKE_HIGH_KEY);
+  window.localStorage.removeItem(MOB_LEVEL_KEY);
   window.dispatchEvent(new Event(SETTINGS_EVENT));
 }

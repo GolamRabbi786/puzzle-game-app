@@ -17,6 +17,7 @@ import {
   DIFFICULTIES,
   formatTime,
   getBest,
+  getMobLevel,
   getSnakeHigh,
   getWins,
 } from "@/lib/game-storage";
@@ -45,6 +46,7 @@ export function SettingsSheet({
   const bestScores = DIFFICULTIES.map((d) => ({ size: d.size, score: getBest(d.size) }));
   const wins = getWins();
   const snakeHigh = getSnakeHigh();
+  const mobLevel = getMobLevel();
 
   const handleClear = () => {
     clearScores();
@@ -112,6 +114,13 @@ export function SettingsSheet({
               <span className="text-sm font-semibold">
                 {snakeHigh > 0 ? snakeHigh : "No score yet"}
               </span>
+            </div>
+            <div className="flex items-center justify-between rounded-xl bg-muted/60 px-3 py-2.5">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <span className="text-base leading-none">👥</span>
+                Mob Control · Level reached
+              </div>
+              <span className="text-sm font-semibold">Level {mobLevel}</span>
             </div>
             <Button
               variant="outline"

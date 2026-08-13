@@ -96,6 +96,12 @@ const GAME_ACCENTS = {
     button:
       "bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600",
   },
+  mob: {
+    bar: "from-amber-400 via-orange-500 to-rose-500",
+    icon: "from-amber-500 to-orange-600",
+    button:
+      "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700",
+  },
 } as const;
 
 function GameCard({
@@ -345,8 +351,8 @@ export default function Landing() {
           <StatCard
             icon={<Gamepad2 className="size-6" />}
             label="Games available"
-            value="3"
-            sub="Puzzle · Snake · Chess"
+            value="4"
+            sub="Puzzle · Snake · Chess · Mob"
             accent="orange"
           />
           <StatCard
@@ -402,6 +408,14 @@ export default function Landing() {
               meta="2 players · castling & more"
               accent="chess"
               to="/game/chess"
+            />
+            <GameCard
+              icon={<span className="text-2xl leading-none">👥</span>}
+              title="Mob Control"
+              desc="Command a crowd, shove enemies into holes, and conquer every level."
+              meta="10 levels · progress saved"
+              accent="mob"
+              to="/game/mob-control"
             />
             <ComingSoonCard
               emoji="🧠"
