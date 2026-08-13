@@ -54,4 +54,12 @@ export const sfx = {
     tone(440, 0.08, { type: "sine", volume: 0.07 });
     tone(330, 0.08, { type: "sine", volume: 0.07, delay: 0.09 });
   },
+  eat() {
+    tone(520, 0.07, { type: "triangle", volume: 0.12 });
+    tone(780, 0.09, { type: "triangle", volume: 0.1, delay: 0.06 });
+  },
+  gameOver() {
+    tone(300, 0.16, { type: "sawtooth", volume: 0.06 });
+    tone(200, 0.22, { type: "sawtooth", volume: 0.06, delay: 0.14 });
+  },
 };

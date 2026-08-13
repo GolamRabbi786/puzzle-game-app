@@ -77,34 +77,69 @@ function MiniBoard({ best }: { best: BestScore | null }) {
   );
 }
 
-function PuzzleCard() {
+const GAME_ACCENTS = {
+  puzzle: {
+    bar: "from-orange-500 via-pink-500 to-violet-500",
+    icon: "from-orange-500 to-pink-500",
+    button:
+      "bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600",
+  },
+  snake: {
+    bar: "from-teal-400 via-emerald-500 to-lime-500",
+    icon: "from-teal-400 to-emerald-500",
+    button:
+      "bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600",
+  },
+  chess: {
+    bar: "from-violet-400 via-indigo-500 to-sky-500",
+    icon: "from-violet-400 to-indigo-500",
+    button:
+      "bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600",
+  },
+} as const;
+
+function GameCard({
+  icon,
+  title,
+  desc,
+  meta,
+  accent,
+  to,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  meta: string;
+  accent: keyof typeof GAME_ACCENTS;
+  to: string;
+}) {
+  const a = GAME_ACCENTS[accent];
   return (
     <motion.div
       whileHover={{ y: -6 }}
       className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-lg shadow-orange-100 ring-1 ring-orange-100 transition-shadow hover:shadow-xl hover:shadow-orange-200/70"
     >
-      <div className="h-2 bg-gradient-to-r from-orange-500 via-pink-500 to-violet-500" />
+      <div className={cn("h-2 bg-gradient-to-r", a.bar)} />
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between">
-          <div className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-pink-500 text-white shadow-md">
-            <PuzzleIcon className="size-6" />
+          <div
+            className={cn(
+              "flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-md",
+              a.icon,
+            )}
+          >
+            {icon}
           </div>
           <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100">
             Available
           </Badge>
         </div>
-        <h3 className="mt-4 font-display text-xl font-bold">Number Puzzle</h3>
-        <p className="mt-1 flex-1 text-sm text-muted-foreground">
-          Slide the numbered tiles into order. A classic brain teaser for every age.
-        </p>
+        <h3 className="mt-4 font-display text-xl font-bold">{title}</h3>
+        <p className="mt-1 flex-1 text-sm text-muted-foreground">{desc}</p>
         <div className="mt-4 flex items-center justify-between">
-          <span className="text-xs font-semibold text-muted-foreground">3×3 · 4×4 · 5×5</span>
-          <Button
-            asChild
-            size="sm"
-            className="rounded-full bg-gradient-to-r from-orange-500 to-pink-500 px-4 hover:from-orange-600 hover:to-pink-600"
-          >
-            <Link to="/game/puzzle">
+          <span className="text-xs font-semibold text-muted-foreground">{meta}</span>
+          <Button asChild size="sm" className={cn("rounded-full px-4", a.button)}>
+            <Link to={to}>
               Play
               <ChevronRight className="size-4" />
             </Link>
@@ -310,8 +345,8 @@ export default function Landing() {
           <StatCard
             icon={<Gamepad2 className="size-6" />}
             label="Games available"
-            value="1"
-            sub="Number Puzzle"
+            value="3"
+            sub="Puzzle · Snake · Chess"
             accent="orange"
           />
           <StatCard
@@ -344,18 +379,29 @@ export default function Landing() {
             </Badge>
           </div>
           <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <PuzzleCard />
-            <ComingSoonCard
-              emoji="🐍"
-              title="Snake"
-              desc="Guide the snake, eat the food, and grow. Coming soon."
-              chip="bg-teal-50"
+            <GameCard
+              icon={<PuzzleIcon className="size-6" />}
+              title="Number Puzzle"
+              desc="Slide the numbered tiles into order. A classic brain teaser for every age."
+              meta="3×3 · 4×4 · 5×5"
+              accent="puzzle"
+              to="/game/puzzle"
             />
-            <ComingSoonCard
-              emoji="♟️"
+            <GameCard
+              icon={<span className="text-2xl leading-none">🐍</span>}
+              title="Snake"
+              desc="Eat the apples, grow longer, and dodge the walls. How far can you go?"
+              meta="Arrow keys · WASD · D-pad"
+              accent="snake"
+              to="/game/snake"
+            />
+            <GameCard
+              icon={<span className="text-2xl leading-none">♟️</span>}
               title="Chess"
-              desc="The timeless battle of minds, board and pieces. Coming soon."
-              chip="bg-violet-50"
+              desc="The timeless battle of minds. Full rules, two players on one device."
+              meta="2 players · castling & more"
+              accent="chess"
+              to="/game/chess"
             />
             <ComingSoonCard
               emoji="🧠"

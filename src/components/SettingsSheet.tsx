@@ -17,6 +17,7 @@ import {
   DIFFICULTIES,
   formatTime,
   getBest,
+  getSnakeHigh,
   getWins,
 } from "@/lib/game-storage";
 
@@ -43,6 +44,7 @@ export function SettingsSheet({
   const { soundOn, toggleSound } = useSoundPreference();
   const bestScores = DIFFICULTIES.map((d) => ({ size: d.size, score: getBest(d.size) }));
   const wins = getWins();
+  const snakeHigh = getSnakeHigh();
 
   const handleClear = () => {
     clearScores();
@@ -101,6 +103,15 @@ export function SettingsSheet({
                 Games won
               </div>
               <span className="text-sm font-semibold">{wins}</span>
+            </div>
+            <div className="flex items-center justify-between rounded-xl bg-muted/60 px-3 py-2.5">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <span className="text-base leading-none">🐍</span>
+                Snake · High score
+              </div>
+              <span className="text-sm font-semibold">
+                {snakeHigh > 0 ? snakeHigh : "No score yet"}
+              </span>
             </div>
             <Button
               variant="outline"

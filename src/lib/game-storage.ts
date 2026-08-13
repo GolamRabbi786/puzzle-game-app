@@ -9,6 +9,7 @@ export const DIFFICULTIES = [
 const SOUND_KEY = "gamezone.sound";
 const BEST_PREFIX = "gamezone.best.";
 const WINS_KEY = "gamezone.wins";
+const SNAKE_HIGH_KEY = "gamezone.snake.high";
 export const SETTINGS_EVENT = "gamezone:settings";
 
 export function formatTime(totalSeconds: number): string {
@@ -60,10 +61,23 @@ export function addWin(): void {
   window.localStorage.setItem(WINS_KEY, String(getWins() + 1));
 }
 
+export function getSnakeHigh(): number {
+  if (typeof window === "undefined") return 0;
+  const n = Number.parseInt(window.localStorage.getItem(SNAKE_HIGH_KEY) ?? "", 10);
+  return Number.isFinite(n) ? n : 0;
+}
+
+export function saveSnakeHigh(score: number): boolean {
+  if (score <= getSnakeHigh()) return false;
+  window.localStorage.setItem(SNAKE_HIGH_KEY, String(score));
+  return true;
+}
+
 export function clearScores(): void {
   for (const d of DIFFICULTIES) {
     window.localStorage.removeItem(`${BEST_PREFIX}${d.size}`);
   }
   window.localStorage.removeItem(WINS_KEY);
+  window.localStorage.removeItem(SNAKE_HIGH_KEY);
   window.dispatchEvent(new Event(SETTINGS_EVENT));
 }
